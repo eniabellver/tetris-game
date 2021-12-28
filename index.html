@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tetris Game</title>
+</head>
+<body>
+
+<div class="game-grid">
+    <canvas id="board" class="game-board"></canvas>
+    <div class="menu">
+        <h1>TETRIS</h1>
+        <p id="score">Score
+        <br>
+        <br><span id="score-display">0</span></p>
+        <p id="next">Up next</p>
+        <canvas id="upcoming" class="next-display"></canvas>
+        <button class="play-btn">Play</button>
+    </div>
+</div>
+<div class="info">
+    <p id="instructions">Use ⬅️ and ➡️ to move.
+    <br>Press ⬆️ to rotate.
+    <br>Press ⬇️ to fall faster.
+    </p>
+</div>
+
+<script type="text/javascript" src="tetris.js"></script>
+
+</body>
+</html>

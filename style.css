@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+:root {
+  --pixel-font: "Press Start 2P", cursive;
+  --mono-font: "Space Mono", monospace;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: 265px 235px;
+  margin: 2em auto;
+  padding: 1em;
+  width: 500px;
+  border: solid 5px;
+  border-radius: 10px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu h1 {
+  font-family: var(--pixel-font);
+  text-align: center;
+}
+
+#score {
+  font-family: var(--pixel-font);
+  text-align: center;
+}
+
+#next {
+  font-family: var(--pixel-font);
+  text-align: center;
+  margin: 0;
+}
+
+.next-display {
+  border: solid 3px;
+  width: 100px;
+  height: 100px;
+  align-self: center;
+}
+
+.play-btn {
+  align-self: center;
+  padding: 10px 20px;
+  font-family: var(--pixel-font);
+  font-size: 18px;
+}
+
+.game-board {
+  display: block;
+  margin: 0;
+  border: solid 3px;
+  width: 240px;
+  height: 400px;
+  align-self: center;
+}
+
+.info {
+  display: block;
+  margin: 0 auto;
+  width: 500px;
+  padding: 1em;
+  border: solid 5px;
+  border-radius: 10px;
+}
+
+#instructions {
+  font-family: var(--mono-font);
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
