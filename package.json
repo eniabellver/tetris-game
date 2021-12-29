@@ -1,0 +1,23 @@
+{
+  "name": "tetris-game",
+  "version": "1.0.0",
+  "description": "A simple Tetris game made using Js, HTML and CSS",
+  "main": "tetris.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eniabellver/tetris-game.git"
+  },
+  "keywords": [],
+  "author": "Enia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eniabellver/tetris-game/issues"
+  },
+  "homepage": "https://github.com/eniabellver/tetris-game#readme",
+  "devDependencies": {
+    "prettier": "2.5.1"
+  }
+}
