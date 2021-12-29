@@ -50,6 +50,7 @@
   padding: 10px 20px;
   font-family: var(--pixel-font);
   font-size: 18px;
+  cursor: pointer;
 }
 
 .game-board {
