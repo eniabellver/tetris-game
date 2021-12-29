@@ -24,6 +24,7 @@ window.addEventListener('load', () => {
     const playButton = document.getElementById('play');
     playButton.addEventListener('click', () => {
         //call the function that starts the game
+        console.log('play button is pressed');
     });
 });
 
