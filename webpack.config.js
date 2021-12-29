@@ -13,5 +13,6 @@ module.exports = {
     },
     port: 9000,
     hot: true,
+    open: true,
   },
 };
