@@ -14,6 +14,16 @@ const BOARD_WIDTH = 10; //width in blocks
 const BOARD_HEIGHT = 20; //height in blocks
 const SCORE = 0;
 
+const KEY = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, P: 80 }; //key event codes
+
+//temportary piece for testing
+//prettier-ignore
+const piece = [
+    [2,0,0],
+    [2,2,2],
+    [0,0,0]
+]
+
 //temporarily commented PIECE out until I need it
 //prettier-ignore
 // const PIECE = [
@@ -24,34 +34,36 @@ const SCORE = 0;
 //      0,0,0,0],
 
 //     // L SHAPE
-//     [1,0,0,
-//      1,1,1,
+//     [2,0,0,
+//      2,2,2,
 //      0,0,0],
 
 //     // J SHAPE
-//     [0,0,1,
-//      1,1,1,
+//     [0,0,3,
+//      3,3,3,
 //      0,0,0],
 
 //     // T SHAPE
-//     [0,1,0,
-//      1,1,1,
+//     [0,4,0,
+//      4,4,4,
 //      0,0,0],
 
 //     // O SHAPE
-//     [1,1,
-//      1,1],
+//     [5,5,
+//      5,5],
 
 //     // S SHAPE
-//     [0,1,1,
-//      1,1,0,
+//     [0,6,6,
+//      6,6,0,
 //      0,0,0],
 
 //     // Z SHAPE
-//     [1,1,0,
-//      0,1,1,
+//     [7,7,0,
+//      0,7,7,
 //      0,0,0]
 // ];
+
+//TODO: declare 7 piece colors including 0 that will be black
 
 /*---------------------------------------
 CALCULATE SCALE AND FILL CANVAS RECTANGLE
@@ -89,9 +101,17 @@ playButton.addEventListener('click', () => {
 GAME FUNCTIONS
 ------------*/
 function start() {
-    //function that resets/starts the board and hides play button
+    //TODO: function that resets/starts the board and hides play button
 }
 
 function lose() {
-    //stops the game when the player loses
+    //TODO: stops the game when the player loses
+}
+
+function randomizePiece() {
+    //TODO: randomize a new piece from array of shapes
+}
+
+function drawPiece() {
+    //TODO: function that renders a new piece in the middle of the board
 }
