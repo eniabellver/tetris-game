@@ -8,7 +8,11 @@ export const NEXT_WIDTH = 5; // upcoming piece canvas width
 export const NEXT_HEIGHT = 5; // upcoming piece canvas width
 
 export const SCORE = 0;
-export const POINTS = 100;
+export const POINTS = {
+    SINGLE_LINE: 100,
+    DOUBLE_LINE: 200,
+    TRIPLE_LINE: 300,
+}
 export const KEY = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, P: 80 }; // key event codes
 
 //prettier-ignore

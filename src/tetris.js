@@ -1,6 +1,6 @@
-import { BOARD_WIDTH, BOARD_HEIGHT } from './constants';
-import { Tetronimo } from './piece.js';
-import { Board } from './board.js';
+import { BOARD_WIDTH, BOARD_HEIGHT, KEY } from './constants';
+import { Tetronimo } from './piece';
+import { Board } from './board';
 
 window.addEventListener('load', () => {
     /*---------------
@@ -30,6 +30,24 @@ window.addEventListener('load', () => {
         console.log('play button is pressed');
     });
 });
+
+/*---------------------
+KEYBOARD ACTIONS EVENTS
+---------------------*/
+window.addEventListener('keydown', function(e) {
+    if(e.code === KEY.DOWN) {
+        //TODO: move piece down
+    } else if (e.code === KEY.UP) {
+        //TODO: rotate piece to the right
+    } else if (e.code === KEY.LEFT) {
+        //TODO: move piece to the left
+    } else if (e.codet === KEY.RIGHT) {
+        //TODO: move piece o the right
+    } else if (e.code === KEY.P) {
+        //TODO: pause the game
+    }
+    //TODO: prevent arrows up/down from scrolling
+})
 
 /*------------
 GAME FUNCTIONS
