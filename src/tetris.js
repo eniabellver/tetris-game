@@ -1,20 +1,34 @@
-/*---------------
-CANVAS AND CONTEXT
-----------------*/
-//TODO: add window 'load' event
-const canvas = document.getElementById('board');
-const ctx = canvas.getContext('2d');
-const canvasNext = document.getElementById('upcoming');
-const ctxNext = canvasNext.getContext('2d');
+import { BOARD_WIDTH, BOARD_HEIGHT} from './constants';
 
-/*------------
-GAME CONSTANTS
-------------*/
-const BOARD_WIDTH = 10; //width in blocks
-const BOARD_HEIGHT = 20; //height in blocks
-const SCORE = 0;
+window.addEventListener('load', () => {
+    /*---------------
+    CANVAS AND CONTEXT
+    ----------------*/
+    const canvas = document.getElementById('board');
+    const ctx = canvas.getContext('2d');
+    const canvasNext = document.getElementById('upcoming');
+    const ctxNext = canvasNext.getContext('2d');
+    
+    /*---------------------------------------
+    CALCULATE SCALE AND FILL CANVAS RECTANGLE
+    ----------------------------------------*/
+    ctx.canvas.width = BOARD_WIDTH * 20;
+    ctx.canvas.height = BOARD_HEIGHT * 20;
+    ctx.scale(20, 20);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const KEY = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, P: 80 }; //key event codes
+    /*---------------
+    PLAY BUTTON EVENT
+    ---------------*/
+    const playButton = document.getElementById('play');
+    playButton.addEventListener('click', () => {
+        //call the function that starts the game
+        console.log('play button is pressed');
+    });
+});
+
+
 
 //temportary piece for testing
 //prettier-ignore
@@ -65,14 +79,6 @@ const piece = [
 
 //TODO: declare 7 piece colors including 0 that will be black
 
-/*---------------------------------------
-CALCULATE SCALE AND FILL CANVAS RECTANGLE
-----------------------------------------*/
-ctx.canvas.width = BOARD_WIDTH * 20;
-ctx.canvas.height = BOARD_HEIGHT * 20;
-ctx.scale(20, 20);
-ctx.fillStyle = '#000';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 /*--------
 GAME BOARD
@@ -89,13 +95,6 @@ const BOARD = createMatrix(BOARD_WIDTH, BOARD_HEIGHT);
 console.log(BOARD);
 console.table(BOARD);
 
-/*---------------
-PLAY BUTTON EVENT
----------------*/
-const playButton = document.getElementById('play');
-playButton.addEventListener('click', () => {
-    //call the function that starts the game
-});
 
 /*------------
 GAME FUNCTIONS
