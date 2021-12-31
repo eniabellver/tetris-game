@@ -26,4 +26,10 @@ export class Tetronimo {
             });
         });
     }
+
+    move() {
+        this.shape = piece.shape;
+        this.x = piece.x;
+        this.y = piece.y;
+    }
 }
