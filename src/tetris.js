@@ -2,12 +2,14 @@ import { BOARD_WIDTH, BOARD_HEIGHT, KEY } from './constants';
 import { Tetronimo } from './piece';
 import { Board } from './board';
 
+let ctx = null;
+
 window.addEventListener('load', () => {
     /*---------------
     CANVAS AND CONTEXT
     ----------------*/
     const canvas = document.getElementById('board');
-    const ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d');
     const canvasNext = document.getElementById('upcoming');
     const ctxNext = canvasNext.getContext('2d');
 
@@ -27,7 +29,6 @@ window.addEventListener('load', () => {
     playButton.addEventListener('click', () => {
         //call the function that starts the game
         start();
-        console.log('play button is pressed');
     });
 });
 
