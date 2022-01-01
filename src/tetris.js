@@ -86,10 +86,6 @@ function resetScore() {
     score = 0;
 }
 
-function resetMoves() {
-    //TODO: build a function that will clear the stored moves
-}
-
 function start() {
     reset();
     board.currentPiece = draw();
@@ -103,10 +99,6 @@ function start() {
 function lose() {
     //TODO: stops the game when the player loses
     playing = false;
-}
-
-function randomPiece() {
-    //TODO: randomize a new piece from array of shapes, return it
 }
 
 function draw() {
