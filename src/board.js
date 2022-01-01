@@ -20,4 +20,37 @@ export class Board {
         }
         return matrix;
     }
+
+    rotate(piece) {
+        let r = piece;
+        for (let y = 0; y < r.shape.length; y++) {
+            for (let x = 0; x < y; x++) {
+                [r.shape[x][y], r.shape[y][x]] = [r.shape[y][x], r.shape[x][y]];
+            }
+        }
+
+        r.shape.forEach((h) => h.reverse());
+        return r;
+    }
+
+    valid(pos) {
+        return pos.shape.every((height, dy) => {
+            return height.every((number, dx) => {
+                let x = pos.x + dx;
+                let y = pos.y + dy;
+                return (
+                    number === 0 ||
+                    (this.isWithinWalls(x) && this.isAboveFloor(y))
+                );
+            });
+        });
+    }
+
+    isWithinWalls(x) {
+        return x >= 0 && x < BOARD_WIDTH;
+    }
+
+    isAboveFloor(y) {
+        return y <= BOARD_HEIGHT - 1;
+    }
 }

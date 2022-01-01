@@ -1,23 +1,29 @@
+import { COLOURS, SHAPES } from './constants';
 /*---------------
 GAME SHAPES LOGIC
 ---------------*/
 export class Tetronimo {
+    x;
+    y;
+    color;
+    shape;
+    index;
 
-    //prettier-ignore
     constructor(ctx) {
         this.cxt = ctx;
-        this.color = '#3E2CDD';
-        this.shape = [
-            [2,0,0],
-            [2,2,2],
-            [0,0,0],
-        ];
+        this.new();
         this.x = 4;
         this.y = 0;
     }
 
+    new() {
+        this.index = this.random(SHAPES.length);
+        this.shape = SHAPES[this.index];
+        this.colour = COLOURS[this.index];
+    }
+
     drawPiece() {
-        this.cxt.fillStyle = this.color;
+        this.cxt.fillStyle = this.colour;
         this.shape.forEach((width, y) => {
             width.forEach((number, x) => {
                 if (number > 0) {
@@ -27,9 +33,12 @@ export class Tetronimo {
         });
     }
 
-    move() {
-        this.shape = piece.shape;
-        this.x = piece.x;
-        this.y = piece.y;
+    move(pos) {
+        this.x = pos.x;
+        this.y = pos.y;
+    }
+
+    random(number) {
+        return Math.floor(Math.random() * number);
     }
 }

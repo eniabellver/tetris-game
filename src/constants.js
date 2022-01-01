@@ -4,6 +4,7 @@ GAME CONSTANTS & RULES
 
 export const BOARD_WIDTH = 10; // canvas width in blocks
 export const BOARD_HEIGHT = 20; // canvas height in blocks
+export const BLOCK_SCALE = 20;
 export const NEXT_WIDTH = 5; // upcoming piece canvas width
 export const NEXT_HEIGHT = 5; // upcoming piece canvas width
 
@@ -11,12 +12,13 @@ export const POINTS = {
     SINGLE_LINE: 100,
     DOUBLE_LINE: 200,
     TRIPLE_LINE: 300,
-}
+    SOFT_DROP: 10,
+};
 
 export const KEY = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, P: 80 }; //key event codes
 
 //prettier-ignore
-export const PIECE = [
+export const SHAPES = [
     // I SHAPE
     [
     [0,0,0,0],
@@ -68,12 +70,11 @@ export const PIECE = [
 ];
 
 export const COLOURS = [
-    '#000',
-    '#22f8fc',
-    '#3E2CDD',
-    '#FF9E1F',
-    '#C247FF',
-    '#FFEC1F',
-    '#98FB0E',
-    '#FF1F1F',
+    '#00E4F5',
+    '#0860C4',
+    '#FF961F',
+    '#CE47FF',
+    '#F5CC00',
+    '#44AF69',
+    '#FF0000',
 ];
