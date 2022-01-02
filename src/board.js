@@ -33,6 +33,17 @@ export class Board {
         return r;
     }
 
+    collide() {
+        this.currentPiece.shape.forEach((height, y) => {
+            height.forEach((number, x) => {
+                if (number > 0) {
+                    //prettier-ignore
+                    this.field[y + this.currentPiece.y][x + this.currentPiece.x] = number;
+                }
+            });
+        });
+    }
+
     valid(pos) {
         return pos.shape.every((height, dy) => {
             return height.every((number, dx) => {

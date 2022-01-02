@@ -1,6 +1,7 @@
 import { BOARD_WIDTH, BOARD_HEIGHT, BLOCK_SCALE, KEY } from './constants';
 import { Tetronimo } from './piece';
 import { Board } from './board';
+import { logField } from './debug';
 
 let ctx = null;
 let playing; // true|false game status
@@ -100,10 +101,7 @@ function start() {
     reset();
     board.currentPiece = draw();
     playing = true;
-    loopAnimation()
-    //show board on the console
-    console.log(board.field);
-    console.table(board.field);
+    loopAnimation();
 }
 
 function loopAnimation(curr = 0) {
@@ -112,7 +110,7 @@ function loopAnimation(curr = 0) {
         time.start = curr;
         dropPiece();
     }
-    let animation = requestAnimationFrame(loopAnimation)
+    let animation = requestAnimationFrame(loopAnimation);
 }
 
 function dropPiece() {
@@ -123,11 +121,9 @@ function dropPiece() {
         board.currentPiece.render();
     } else {
         //stop the piece
+        board.collide();
+        logField(board.field);
     }
-}
-
-function stopPiece() {
-    //TODO: stop piece at the bottom
 }
 
 function lose() {
