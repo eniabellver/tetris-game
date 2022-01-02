@@ -5,7 +5,7 @@
   "main": "tetris.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack serve",
+    "dev": "webpack server",
     "test": "jest",
     "test:watch": "jest --watch"
   },
