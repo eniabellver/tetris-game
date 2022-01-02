@@ -1,12 +1,20 @@
 /*--------------
 GAME BOARD LOGIC
 --------------*/
-import { BOARD_WIDTH, BOARD_HEIGHT } from './constants';
+import { BOARD_WIDTH, BOARD_HEIGHT, COLOURS } from './constants';
 
 /*--------
 GAME BOARD
 --------*/
 export class Board {
+    ctx;
+    field;
+    currentPiece;
+
+    constructor(ctx) {
+        this.ctx = ctx;
+    }
+
     //clear board
     new() {
         this.field = this.createMatrix(BOARD_WIDTH, BOARD_HEIGHT);
@@ -44,6 +52,28 @@ export class Board {
         });
     }
 
+    render() {
+        this.field.forEach((height, y) => {
+            height.forEach((number, x) => {
+                if (number > 0) {
+                    this.ctx.fillStyle = COLOURS[number];
+                    this.ctx.fillRect(x, y, 1, 1);
+                }
+            });
+        });
+    }
+
+    update() {
+        this.field.forEach((height, y) => {
+            height.forEach((number, x) => {
+                if (number > 0) {
+                    this.ctx.fillStyle = COLOURS[number];
+                    this.ctx.fillRect(x, y, 1, 1);
+                }
+            });
+        });
+    }
+
     valid(pos) {
         return pos.shape.every((height, dy) => {
             return height.every((number, dx) => {
@@ -51,10 +81,14 @@ export class Board {
                 let y = pos.y + dy;
                 return (
                     number === 0 ||
-                    (this.isWithinWalls(x) && this.isAboveFloor(y))
+                    (this.isAvailable(x, y) && this.isWithinWalls(x) && this.isAboveFloor(y))
                 );
             });
         });
+    }
+
+    isAvailable(x, y) {
+        return this.field[y] && this.field[y][x] === 0;
     }
 
     isWithinWalls(x) {

@@ -3,7 +3,10 @@ import { Tetronimo } from './piece';
 import { Board } from './board';
 import { logField } from './debug';
 
+let canvas;
 let ctx = null;
+let canvasNext;
+let ctxNext;
 let playing; // true|false game status
 let score; // score tracker
 let time = { start: 0, passed: 0, speed_modifier: 1000 };
@@ -14,17 +17,24 @@ window.addEventListener('load', () => {
     /*---------------
     CANVAS AND CONTEXT
     ----------------*/
-    const canvas = document.getElementById('board');
+    canvas = document.getElementById('board');
     ctx = canvas.getContext('2d');
-    const canvasNext = document.getElementById('upcoming');
-    const ctxNext = canvasNext.getContext('2d');
+    canvasNext = document.getElementById('upcoming');
+    ctxNext = canvasNext.getContext('2d');
 
     /*---------------------
     INITIATE CANVAS + SCALE
     ---------------------*/
-    ctx.canvas.width = BOARD_WIDTH * BLOCK_SCALE;
-    ctx.canvas.height = BOARD_HEIGHT * BLOCK_SCALE;
+    ctx.canvas.width = NEXT_WIDTH * BLOCK_SCALE;
+    ctx.canvas.height = NEXT_HEIGHT * BLOCK_SCALE;
     ctx.scale(BLOCK_SCALE, BLOCK_SCALE);
+
+    /*--------------------------
+    INITIATE NEXT CANVAS + SCALE
+    --------------------------*/
+    ctxNext.canvasNext.width = BOARD_WIDTH * BLOCK_SCALE;
+    ctxNext.canvasNext.height = BOARD_HEIGHT * BLOCK_SCALE;
+    ctxNext.scale(BLOCK_SCALE, BLOCK_SCALE);
 
     /*---------------
     PLAY BUTTON EVENT
@@ -104,31 +114,36 @@ function start() {
     loopAnimation();
 }
 
+function lose() {
+    //TODO: stops the game when the player loses
+    playing = false;
+}
+
 function loopAnimation(curr = 0) {
     time.passed = curr - time.start;
     if (time.passed > time.speed_modifier) {
         time.start = curr;
         dropPiece();
     }
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    updateField();
     let animation = requestAnimationFrame(loopAnimation);
+}
+
+function updateField() {
+    board.currentPiece.render();
+    board.update();
 }
 
 function dropPiece() {
     let pos = PIECE_MOVES[KEY.DOWN](board.currentPiece);
     if (board.valid(pos)) {
         board.currentPiece.move(pos);
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        board.currentPiece.render();
     } else {
         //stop the piece
         board.collide();
         logField(board.field);
     }
-}
-
-function lose() {
-    //TODO: stops the game when the player loses
-    playing = false;
 }
 
 function draw() {
