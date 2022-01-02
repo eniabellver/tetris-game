@@ -5,6 +5,7 @@ import { Board } from './board';
 let ctx = null;
 let playing; // true|false game status
 let score; // score tracker
+let time = { start: 0, passed: 0, speed_modifier: 1000 };
 
 let board = new Board();
 
@@ -37,26 +38,27 @@ window.addEventListener('load', () => {
 /*---------------------
 KEYBOARD ACTIONS EVENTS
 ---------------------*/
-const PIECE_MOVES = {
+export const PIECE_MOVES = {
     [KEY.UP]: (pos) => board.rotate(pos),
     [KEY.DOWN]: (pos) => ({ ...pos, y: pos.y + 1 }), //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
     [KEY.LEFT]: (pos) => ({ ...pos, x: pos.x - 1 }),
     [KEY.RIGHT]: (pos) => ({ ...pos, x: pos.x + 1 }),
 };
-// const pos = this.PIECE_MOVES[e.keyCode](this.piece);
 
 window.addEventListener('keydown', handleKeyEvent, true);
 function handleKeyEvent(e) {
     let handled;
     if (e.keyCode === KEY.P) {
         //pause
-    } else if (playing && PIECE_MOVES[e.keyCode]) {
+        dropPiece();
+    }
+    if (playing && PIECE_MOVES[e.keyCode]) {
         handled = true;
         let pos = PIECE_MOVES[e.keyCode](board.currentPiece);
         if (board.valid(pos)) {
             board.currentPiece.move(pos);
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            board.currentPiece.drawPiece();
+            board.currentPiece.render();
         }
     }
     if (handled) {
@@ -71,8 +73,8 @@ GAME FUNCTIONS
 function reset() {
     //TODO: build a function that will reset the game
     resetBoard();
-    //call resetScore()
-    //call resetMoves()
+    resetTime();
+    //resetScore();
 }
 
 function resetBoard() {
@@ -86,14 +88,46 @@ function resetScore() {
     score = 0;
 }
 
+function resetTime() {
+    return (time = {
+        start: 0,
+        passed: 0,
+        speed_modifier: 1000,
+    });
+}
+
 function start() {
     reset();
     board.currentPiece = draw();
     playing = true;
-
+    loopAnimation()
     //show board on the console
     console.log(board.field);
     console.table(board.field);
+}
+
+function loopAnimation(curr = 0) {
+    time.passed = curr - time.start;
+    if (time.passed > time.speed_modifier) {
+        time.start = curr;
+        dropPiece();
+    }
+    let animation = requestAnimationFrame(loopAnimation)
+}
+
+function dropPiece() {
+    let pos = PIECE_MOVES[KEY.DOWN](board.currentPiece);
+    if (board.valid(pos)) {
+        board.currentPiece.move(pos);
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        board.currentPiece.render();
+    } else {
+        //stop the piece
+    }
+}
+
+function stopPiece() {
+    //TODO: stop piece at the bottom
 }
 
 function lose() {
@@ -104,11 +138,11 @@ function lose() {
 function draw() {
     //TODO: update function so it draws a new piece, taking the one that's been returned by nextPiece() as an argument
     let piece = new Tetronimo(ctx);
-    piece.drawPiece();
+    piece.render();
     return piece;
 }
 
-function nextPiece(piece) {
+function next(piece) {
     //TODO: call randomPiece and save piece as the next one, return it for currentPiece to use
     return next;
 }

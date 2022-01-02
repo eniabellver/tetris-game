@@ -13,7 +13,7 @@ export class Tetronimo {
         this.cxt = ctx;
         this.new();
         this.x = 4;
-        this.y = 0;
+        this.y = -1;
     }
 
     new() {
@@ -22,7 +22,7 @@ export class Tetronimo {
         this.colour = COLOURS[this.index];
     }
 
-    drawPiece() {
+    render() {
         this.cxt.fillStyle = this.colour;
         this.shape.forEach((width, y) => {
             width.forEach((number, x) => {
