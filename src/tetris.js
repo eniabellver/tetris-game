@@ -1,4 +1,11 @@
-import { BOARD_WIDTH, BOARD_HEIGHT, BLOCK_SCALE, KEY } from './constants';
+import {
+    BOARD_WIDTH,
+    BOARD_HEIGHT,
+    NEXT_WIDTH,
+    NEXT_HEIGHT,
+    BLOCK_SCALE,
+    KEY,
+} from './constants';
 import { Tetronimo } from './piece';
 import { Board } from './board';
 import { logField } from './debug';
@@ -25,16 +32,16 @@ window.addEventListener('load', () => {
     /*---------------------
     INITIATE CANVAS + SCALE
     ---------------------*/
-    ctx.canvas.width = NEXT_WIDTH * BLOCK_SCALE;
-    ctx.canvas.height = NEXT_HEIGHT * BLOCK_SCALE;
+    ctx.canvas.width = BOARD_WIDTH * BLOCK_SCALE;
+    ctx.canvas.height = BOARD_HEIGHT * BLOCK_SCALE;
     ctx.scale(BLOCK_SCALE, BLOCK_SCALE);
 
     /*--------------------------
     INITIATE NEXT CANVAS + SCALE
     --------------------------*/
-    ctxNext.canvasNext.width = BOARD_WIDTH * BLOCK_SCALE;
-    ctxNext.canvasNext.height = BOARD_HEIGHT * BLOCK_SCALE;
-    ctxNext.scale(BLOCK_SCALE, BLOCK_SCALE);
+    // ctxNext.canvasNext.width = NEXT_WIDTH * BLOCK_SCALE;
+    // ctxNext.canvasNext.height = NEXT_HEIGHT * BLOCK_SCALE;
+    // ctxNext.scale(BLOCK_SCALE, BLOCK_SCALE);
 
     /*---------------
     PLAY BUTTON EVENT
