@@ -6,6 +6,25 @@
   --mono-font: "Space Mono", monospace;
 }
 
+body {
+  background: linear-gradient(90deg, #df8c8c, #5656b1, #3c8db5, #80c8c8);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .game-grid {
   display: grid;
   grid-template-columns: 265px 235px;
@@ -14,6 +33,7 @@
   width: 500px;
   border: solid 5px;
   border-radius: 10px;
+  background-color: white;
 }
 
 .menu {
@@ -69,6 +89,7 @@
   padding: 1em;
   border: solid 5px;
   border-radius: 10px;
+  background-color: white;
 }
 
 #instructions {
