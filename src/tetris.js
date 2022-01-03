@@ -1,10 +1,11 @@
 import {
     BOARD_WIDTH,
     BOARD_HEIGHT,
-    NEXT_WIDTH,
-    NEXT_HEIGHT,
+    NEXT_SIZE,
     BLOCK_SCALE,
     KEY,
+    COLOURS,
+    SHAPES,
 } from './constants';
 import { Tetronimo } from './piece';
 import { Board } from './board';
@@ -12,8 +13,8 @@ import { logField } from './debug';
 
 let canvas;
 let ctx = null;
-let canvasNext;
-let ctxNext;
+let ncanvas;
+let nctx = null;
 let playing; // true|false game status
 let score; // score tracker
 let time = { start: 0, passed: 0, speed_modifier: 1000 };
@@ -26,32 +27,40 @@ window.addEventListener('load', () => {
     ----------------*/
     canvas = document.getElementById('board');
     ctx = canvas.getContext('2d');
-    canvasNext = document.getElementById('upcoming');
-    ctxNext = canvasNext.getContext('2d');
+    ncanvas = document.getElementById('upcoming');
+    nctx = ncanvas.getContext('2d');
 
     /*---------------------
     INITIATE CANVAS + SCALE
     ---------------------*/
-    ctx.canvas.width = BOARD_WIDTH * BLOCK_SCALE;
-    ctx.canvas.height = BOARD_HEIGHT * BLOCK_SCALE;
-    ctx.scale(BLOCK_SCALE, BLOCK_SCALE);
+    function canvasBuild() {
+        ctx.canvas.width = BOARD_WIDTH * BLOCK_SCALE;
+        ctx.canvas.height = BOARD_HEIGHT * BLOCK_SCALE;
+        ctx.scale(BLOCK_SCALE, BLOCK_SCALE);
+    }
+    canvasBuild();
 
     /*--------------------------
     INITIATE NEXT CANVAS + SCALE
     --------------------------*/
-    // ctxNext.canvasNext.width = NEXT_WIDTH * BLOCK_SCALE;
-    // ctxNext.canvasNext.height = NEXT_HEIGHT * BLOCK_SCALE;
-    // ctxNext.scale(BLOCK_SCALE, BLOCK_SCALE);
+    function ncanvasBuild() {
+        nctx.width = NEXT_SIZE * BLOCK_SCALE;
+        nctx.height = NEXT_SIZE * BLOCK_SCALE;
+        nctx.scale(BLOCK_SCALE, BLOCK_SCALE);
+    }
+    ncanvasBuild();
 
     /*---------------
     PLAY BUTTON EVENT
     ---------------*/
     const playButton = document.getElementById('play');
     playButton.addEventListener('click', () => {
-        start();
+        gameStart();
         //console.log('play button is pressed');
     });
 });
+
+
 
 /*---------------------
 KEYBOARD ACTIONS EVENTS
@@ -114,14 +123,14 @@ function resetTime() {
     });
 }
 
-function start() {
+function gameStart() {
     reset();
     board.currentPiece = draw();
     playing = true;
     loopAnimation();
 }
 
-function lose() {
+function gameOver() {
     //TODO: stops the game when the player loses
     playing = false;
 }
@@ -133,13 +142,8 @@ function loopAnimation(curr = 0) {
         dropPiece();
     }
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    updateField();
+    updateGame();
     let animation = requestAnimationFrame(loopAnimation);
-}
-
-function updateField() {
-    board.currentPiece.render();
-    board.update();
 }
 
 function dropPiece() {
@@ -149,24 +153,43 @@ function dropPiece() {
     } else {
         //stop the piece
         board.collide();
+        board.currentPiece = draw();
         logField(board.field);
     }
 }
 
+function updateGame() {
+    board.currentPiece.render();
+    updateBoard();
+}
+
+function updateBoard() {
+    board.field.forEach((height, y) => {
+        height.forEach((number, x) => {
+            if (number > 0) {
+                ctx.fillStyle = COLOURS[number - 1];
+                ctx.fillRect(x, y, 1, 1);
+            }
+        });
+    });
+}
+
 function draw() {
     //TODO: update function so it draws a new piece, taking the one that's been returned by nextPiece() as an argument
-    let piece = new Tetronimo(ctx);
-    piece.render();
+    let piece = getNext();
     return piece;
 }
 
-function next(piece) {
+function getNext() {
     //TODO: call randomPiece and save piece as the next one, return it for currentPiece to use
+    let next = new Tetronimo(ctx);
+    next.render();
     return next;
 }
 
-function displayNext() {
+function displayNext(piece) {
     //TODO: show what piece is coming next on the next canvas
+
 }
 
 function displayScore() {

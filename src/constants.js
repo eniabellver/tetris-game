@@ -5,8 +5,7 @@ GAME CONSTANTS & RULES
 export const BOARD_WIDTH = 10; // canvas width in blocks
 export const BOARD_HEIGHT = 20; // canvas height in blocks
 export const BLOCK_SCALE = 20;
-export const NEXT_WIDTH = 5; // upcoming piece canvas width
-export const NEXT_HEIGHT = 5; // upcoming piece canvas width
+export const NEXT_SIZE = 5; // upcoming piece canvas width and height
 
 export const POINTS = {
     SINGLE_LINE: 100,

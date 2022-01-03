@@ -63,17 +63,6 @@ export class Board {
         });
     }
 
-    update() {
-        this.field.forEach((height, y) => {
-            height.forEach((number, x) => {
-                if (number > 0) {
-                    this.ctx.fillStyle = COLOURS[number];
-                    this.ctx.fillRect(x, y, 1, 1);
-                }
-            });
-        });
-    }
-
     valid(pos) {
         return pos.shape.every((height, dy) => {
             return height.every((number, dx) => {
