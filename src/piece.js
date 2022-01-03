@@ -3,9 +3,11 @@ import { COLOURS, SHAPES } from './constants';
 GAME SHAPES LOGIC
 ---------------*/
 export class Tetronimo {
+    ctx;
+    nxtx;
     x;
     y;
-    color;
+    colour;
     shape;
     index;
 

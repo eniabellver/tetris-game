@@ -1,23 +1,34 @@
 /*--------------
 GAME BOARD LOGIC
 --------------*/
-import { BOARD_WIDTH, BOARD_HEIGHT, COLOURS } from './constants';
+import {
+    BOARD_WIDTH,
+    BOARD_HEIGHT,
+    NEXT_SIZE,
+    COLOURS,
+    SCORE,
+    POINTS,
+} from './constants';
 
 /*--------
 GAME BOARD
 --------*/
 export class Board {
     ctx;
+    nctx;
     field;
+    next_field;
     currentPiece;
 
-    constructor(ctx) {
+    constructor(ctx, nctx) {
         this.ctx = ctx;
+        this.nctx = nctx;
     }
 
     //clear board
     new() {
         this.field = this.createMatrix(BOARD_WIDTH, BOARD_HEIGHT);
+        this.next_field = this.createMatrix(NEXT_SIZE, NEXT_SIZE);
     }
 
     //generate board matrix
@@ -31,6 +42,7 @@ export class Board {
 
     rotate(piece) {
         let r = piece;
+        let isAtLeftWall = this.field.x;
         for (let y = 0; y < r.shape.length; y++) {
             for (let x = 0; x < y; x++) {
                 [r.shape[x][y], r.shape[y][x]] = [r.shape[y][x], r.shape[x][y]];
@@ -70,7 +82,9 @@ export class Board {
                 let y = pos.y + dy;
                 return (
                     number === 0 ||
-                    (this.isAvailable(x, y) && this.isWithinWalls(x) && this.isAboveFloor(y))
+                    (this.isAvailable(x, y) &&
+                        this.isWithinWalls(x) &&
+                        this.isAboveFloor(y))
                 );
             });
         });

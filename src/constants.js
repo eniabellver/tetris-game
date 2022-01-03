@@ -9,8 +9,9 @@ export const NEXT_SIZE = 5; // upcoming piece canvas width and height
 
 export const POINTS = {
     SINGLE_LINE: 100,
-    DOUBLE_LINE: 200,
-    TRIPLE_LINE: 300,
+    DOUBLE_LINE: 250,
+    TRIPLE_LINE: 500,
+    QUAD_LINE: 700,
     SOFT_DROP: 10,
 };
 
